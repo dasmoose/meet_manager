@@ -1,0 +1,39 @@
+<div class="row">
+<div class="twelve columns">
+  <p>
+  <h4 id="top">
+    <% @alphabet.each_index do |letter| %>
+      <% if @alpha_arr[letter].count != 0 %>
+        <a href="#<%=@alphabet[letter]%>"> <%= @alphabet[letter].upcase %></a>
+    <% else %>
+        <%= @alphabet[letter].upcase %>
+      <% end %>
+      <% if @alphabet[letter] != @alphabet.last %>
+        &brvbar; 
+      <% end %>
+    <% end %>
+  </h4>
+  </p>
+<% @alpha_arr.each_index do |letter| %>
+  <div class="row">
+    <div class="four columns">
+      <p>
+      <% if @alpha_arr[letter].count > 0 %>
+      <a class="button" id="<%=@alphabet[letter]%>" href="#top"><%= @alphabet[letter].upcase %> &uarr;</a>
+    <% end %>
+      </p>
+    </div> <div class="eight columns">
+  </div>
+</div>
+<% @alpha_arr[letter].each do |swimmer| %>
+<div class="row"> <div class="twelve columns">
+<div class="panel radius">
+	<h3><%= swimmer.last_name %>, <%= swimmer.first_name %></h3>
+</div>
+</div></div>
+<% end %>
+
+<% end %>
+</div>
+</div>
+
