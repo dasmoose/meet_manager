@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="twelve columns">
+    <h1>Add Events</h1>
+    <div class="panel">
+      <div class="row">
+        <p id="notice"> </p>
+        <%= form_for(@event, :url => meet_events_path(@meet), :remote => true) do |f| %>
+        <div class="two columns">
+          <label>Event #</label>
+          <%= f.text_field :number, :id => "event_number" %>
+        </div>
+        <div class="three columns">
+          <label>Gender</label>
+          <%= select_tag(:gender, options_for_select(@gender_list)) %>
+        </div>
+        <div class="three columns">
+          <label>Age Group</label>
+          <%= f.text_field :age, :id => "age_group" %> 
+        </div>
+        <div class="two columns">
+          <label>Race Type</label>
+          <%=f.collection_select :race_type, RaceType.all, :id, :display_name %> 
+        </div>
+        <div class="one columns">
+          <%= f.submit "Create Entry", :class => ""%>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+    <div class="panel">
+      <h3>Current Events</h3>
+      <table class="twelve">
+        <thead>
+          <tr>
+            <th>Event #</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Event</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @events.each do |event| %>
+            <tr>
+              <td> <%= event.number %> </td>
+              <td> <%= event.gender %> </td>
+              <td> <%= event.age %> </td>
+              <td> <%= event.race_type.display_name %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

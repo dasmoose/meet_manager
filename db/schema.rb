@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(:version => 20130220075500) do
 
   create_table "events", :force => true do |t|
     t.integer  "race_type_id"
+    t.integer  "meet_id"
     t.integer  "number"
     t.string   "gender"
     t.string   "age"

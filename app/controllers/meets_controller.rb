@@ -20,7 +20,7 @@ class MeetsController < ApplicationController
   def create
     @meet = Meet.new(params[:meet])
     if @meet.save
-      redirect_to team_new_path(:meet => @meet.id)
+      redirect_to new_meet_event_path(@meet)
     else
       render 'new'
     end
