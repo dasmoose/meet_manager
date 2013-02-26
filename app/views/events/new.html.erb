@@ -1,9 +1,15 @@
 <div class="row">
   <div class="twelve columns">
-    <h1>Add Events</h1>
+    <div class="row">
+      <div class="nine columns">
+        <h1>Add Events</h1>
+      </div>
+      <div class="three columns">
+        <%= link_to "Finish Creating Meet", meet_path(@meet), :class => "success button" %>
+      </div>
+    </div>
     <div class="panel">
       <div class="row">
-        <p id="notice"> </p>
         <%= form_for(@event, :url => meet_events_path(@meet), :remote => true) do |f| %>
         <div class="two columns">
           <label>Event #</label>
@@ -21,8 +27,9 @@
           <label>Race Type</label>
           <%=f.collection_select :race_type, RaceType.all, :id, :display_name %> 
         </div>
-        <div class="one columns">
-          <%= f.submit "Create Entry", :class => ""%>
+        <div class="two columns">
+          <br>
+          <%= f.submit "Create Entry", :class => "medium button"%>
         </div>
       <% end %>
       </div>
