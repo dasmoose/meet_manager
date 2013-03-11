@@ -1,0 +1,20 @@
+<% @teams.each do |team| %>
+  <tr id="<%= team.id %>">
+    <td> <%= team.name %> </td>
+    <td> <%= team.location %> </td>
+    <td> <%= team.coach_name %> </td>
+    <td> <%= link_to "Remove", meet_team_path(team.meet_id, team), :method => :delete, :remote => true %> </td>
+    <td> <a onclick="change_to_edit_mode(<%=team.id %>)" href="javascript:void(0);"> Edit </a> </td>
+  </tr>
+
+<tr id="<%= team.id %>-edit" style="display:none">
+  <%= form_for(team, :url => meet_team_path(team.meet_id, team)) do |f| %>
+    <td><%= f.text_field :name, :id => "name", :value => team.name %></td>
+    <td><%= f.text_field :location, :id => "location", :value => team.location %></td>
+    <td><%= f.text_field :coach_name, :id => "coach_name", :value => team.coach_name %> </td>
+    <td> <%= f.submit "Update", :class => "small button" %> </td>
+    <td> <a onclick="change_to_view_mode(<%=team.id %>)" class="small button" href="javascript:void(0);"> Cancel </a> </td>
+  <% end %>
+</tr>
+
+<% end %>

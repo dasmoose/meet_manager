@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(:version => 20130220075500) do
   create_table "swimmers", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "age"
     t.integer  "team_id"
     t.boolean  "checked_in"
     t.datetime "created_at", :null => false
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20130220075500) do
     t.string   "short_name"
     t.string   "location"
     t.string   "coach_name"
+    t.integer  "meet_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

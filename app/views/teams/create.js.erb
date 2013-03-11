@@ -1,0 +1,10 @@
+var table = document.getElementsByTagName("tbody")[0];
+
+if (<%= @team.errors.any? %>)
+{
+
+}
+else
+{
+  table.innerHTML = "<%= j render(@team) %>";
+}

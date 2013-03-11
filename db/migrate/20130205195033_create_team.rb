@@ -5,7 +5,7 @@ class CreateTeam < ActiveRecord::Migration
       t.string :short_name
       t.string :location
       t.string :coach_name
-
+      t.references :meet
       t.timestamps
     end
   end

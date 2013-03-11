@@ -1,4 +1,7 @@
 class Team < ActiveRecord::Base
-  attr_accessible :name, :short_name, :location, :coach_name
+  belongs_to :meet
   has_many :swimmers
+  attr_accessible :name, :short_name, :location, :coach_name, :meet
+
+  validates :name, :location, :coach_name, :meet, :presence => true
 end

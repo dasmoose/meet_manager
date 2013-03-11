@@ -1,0 +1,8 @@
+<tr id="<%= @team.id %>">
+  <%= form_for(@team, url => meet_team_path(params[:meet_id]), :method => :update, :remote => true) do |f| %>
+    <td> <%= f.text_field :name, :value => @team.name %> </td>
+    <td> <%= f.text_field :location, :value => @team.location %> </td>
+    <td> <%= f.text_field :coach_name. :value => @team.coach_name %> </td>
+    <td> <%= f.submit "Update" %>
+  <% end %>
+</tr>

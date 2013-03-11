@@ -1,9 +1,13 @@
 var table = document.getElementsByTagName("tbody")[0];
-
-table.innerHTML += "<%= j render(@event) %>";
-
-var number = document.getElementById('event_number');
-number.value = parseInt(number.value) + 1;
-
-document.getElementById('age_group').value = "";
-
+if (<%= @event.errors.any? %>) 
+{
+  document.getElementById('event_number').setAttribute("class", "error");
+}
+else 
+{
+  table.innerHTML = "<%= j render(@event) %>";
+  var number = document.getElementById('event_number');
+  number.value = parseInt(number.value) + 1;
+  number.setAttribute("class", "");
+  document.getElementById('age_group').value = "" ;
+}

@@ -1,7 +1,9 @@
 class MeetsController < ApplicationController
   
   def show
-    
+    @meet = Meet.find_by_id(params[:id])
+    @teams = Team.find_all_by_meet_id(params[:id], :order => "name ASC")
+    @events = Event.find_all_by_meet_id(params[:id], :order => "number ASC")
   end
   
   def edit

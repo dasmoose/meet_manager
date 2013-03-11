@@ -1,16 +1,55 @@
 <div class="row">
   <div class="twelve columns">
-    <h1>Create New Meet</h1>
-      <div class="panel">
-      <%= form_for(@team) do |f| %>
-        <label>Team Name</label>
-        <%= f.text_field :name %>
-        <label>Location</label>
-        <%= f.text_field :location %>
-        <label>Coach Name</label>
-        <%= f.text_field :coach_name %>
-        <%= f.submit "Finish Creating Meet" %>
+    <div class="row">
+      <div class="nine columns">
+        <h1>Add Teams</h1>
+      </div>
+      <div class="three columns">
+        <%= link_to "Go to Meet Page", meet_path(params[:meet_id]), :class => "success button" %>
+      </div>
+    </div>
+    <div class="panel"> <div class="row">
+        <%= form_for(@team, :url => meet_teams_path(params[:meet_id]), :remote => true) do |f| %>
+        <div class="four columns">
+          <label>Team Name</label>
+          <%= f.text_field :name, :id => "name" %>
+        </div>
+        <div class="four columns">
+          <label>Location</label>
+          <%= f.text_field :location, :id => "location" %>
+        </div>
+        <div class="four columns">
+          <label>Head Coach Name</label>
+          <%= f.text_field :coach_name, :id => "coach_name" %> 
+        </div>
+        <div class="two columns">
+          <br>
+          <%= f.submit "Create Team", :class => "medium button"%>
+        </div>
       <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+    <div class="panel">
+      <h3>Current Teams</h3>
+      <table class="twelve">
+        <thead>
+          <tr>
+            <th>Team Name</th>
+            <th>Location</th>
+            <th>Head Coach Name</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render (@team) %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

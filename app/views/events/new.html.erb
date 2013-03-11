@@ -5,15 +5,14 @@
         <h1>Add Events</h1>
       </div>
       <div class="three columns">
-        <%= link_to "Finish Creating Meet", meet_path(@meet), :class => "success button" %>
+        <%= link_to "Add Teams", new_meet_team_path(@meet), :class => "success button" %>
       </div>
     </div>
-    <div class="panel">
-      <div class="row">
+    <div class="panel"> <div class="row">
         <%= form_for(@event, :url => meet_events_path(@meet), :remote => true) do |f| %>
         <div class="two columns">
           <label>Event #</label>
-          <%= f.text_field :number, :id => "event_number" %>
+          <%= f.text_field :number, :id => "event_number", :value => @current_number %>
         </div>
         <div class="three columns">
           <label>Gender</label>
@@ -48,17 +47,12 @@
             <th>Gender</th>
             <th>Age</th>
             <th>Event</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
-          <% @events.each do |event| %>
-            <tr>
-              <td> <%= event.number %> </td>
-              <td> <%= event.gender %> </td>
-              <td> <%= event.age %> </td>
-              <td> <%= event.race_type.display_name %> </td>
-            </tr>
-          <% end %>
+          <%= render(@event) %>
         </tbody>
       </table>
     </div>
