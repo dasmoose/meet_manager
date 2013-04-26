@@ -1,0 +1,24 @@
+<% @teams.each do |team| %>
+<p>
+  <div id="<%= team.id %>">
+    <div class="large-3 columns"> <%= team.name %> </div>
+    <div class="large-3 columns"> <%= team.location %> </div>
+    <div class="large-2 columns"> <%= team.coach_name %> </div>
+    <div class="large-2 columns"> <%= link_to "Remove", meet_team_path(team.meet_id, team), :method => :delete, :remote => true %> </div>
+    <div class="large-2 columns"> <a onclick="change_to_edit_mode(<%=team.id %>)" href="javascript:void(0);"> Edit </a> </div>
+  </div>
+</p>
+
+<p>
+<div class="twelve columns" id="<%= team.id %>-edit" style="display:none">
+  <%= form_for(team, :url => meet_team_path(team.meet_id, team), :remote => true) do |f| %>
+    <div class="large-3 columns"> <%= f.text_field :name, :id => "name", :value => team.name %></div>
+    <div class="large-3 columns"> <%= f.text_field :location, :id => "location", :value => team.location %></div>
+    <div class="large-2 columns"> <%= f.text_field :coach_name, :id => "coach_name", :value => team.coach_name %> </div>
+    <div class="large-2 columns"> <%= f.submit "Update", :class => "small button" %> </div>
+    <div class="large-2 columns"> <a onclick="change_to_view_mode(<%=team.id %>)" class="small button" href="javascript:void(0);"> Cancel </a> </div>
+  <% end %>
+</div>
+</p>
+
+<% end %>

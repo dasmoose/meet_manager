@@ -1,50 +1,30 @@
 <div class="row">
-<div class="twelve columns">
-  <div class="row">
-    <div class="twelve columns">
-      <%= link_to "Add Swimmer", new_meet_team_swimmer_path(params[:meet_id], params[:team_id]), :class => "small button" %>
-      <%= link_to "Back to Meet Page", meet_path(params[:meet_id]), :class => "small button" %>
-    </div>
+  <div class="large-12 columns">
+    <ul class="breadcrumbs">
+      <li><%= link_to @meet.name, meet_path(@meet) %> </li>
+      <li class="current"><a href="#"><%= @team.name %> </a></li>
+    </ul>
   </div>
-  <p>
-  <h4 id="top">
-    <% @alphabet.each_index do |letter| %>
-      <% if @alpha_arr[letter].count != 0 %>
-        <a href="#<%=@alphabet[letter]%>"> <%= @alphabet[letter].upcase %></a>
-      <% else %>
-        <%= @alphabet[letter].upcase %>
-      <% end %>
-      <% if @alphabet[letter] != @alphabet.last %>
-        &brvbar; 
-      <% end %>
-    <% end %>
-  </h4>
-  </p>
-
-<% @alpha_arr.each_index do |letter| %>
-  <div class="row">
-    <div class="four columns">
-      <p>
-      <% if @alpha_arr[letter].count > 0 %>
-      <a class="button" id="<%=@alphabet[letter]%>" href="#top"><%= @alphabet[letter].upcase %> &uarr;</a>
-      <% end %>
-      </p>
-    </div> 
-    <div class="eight columns">
-    </div>
-  </div>
-
-  <% @alpha_arr[letter].each do |swimmer| %>
-   <div class="row"> 
-     <div class="twelve columns">
-       <div class="panel radius">
-	 <h3><%= swimmer.last_name %>, <%= swimmer.first_name %></h3>
-       </div>
-     </div>
-   </div>
-  <% end %>
-
-<% end %>
 </div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h3><%= @team.name %> <small> Location: <%= @team.location %> Coach name: <%= @team.coach_name %> </small> </h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div class="panel">
+      <%= render "new_swimmer_form" %>
+      <%= render "import_swimmer_form" %>
+    </div> 
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <%= render "all_swimmers" %>
+  </div>
 </div>
 

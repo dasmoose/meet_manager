@@ -1,0 +1,23 @@
+<div class="row">
+<table class="large-12">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Age </th>
+      <th> Team </th>
+      <th> # Events </th>
+    </tr>
+  <thead>
+
+  <tbody>
+    <% @swimmers.each do |swimmer| %>
+    <tr>
+      <td> <%= link_to "#{swimmer.last_name}, #{swimmer.first_name}", meet_team_swimmer_path(@meet, swimmer.team.id, swimmer.id) %> </td>
+      <td> <%= swimmer.age %> </td>
+      <td> <%= link_to swimmer.team.name, meet_team_swimmers_path(@meet, swimmer.team.id) %> </td>
+      <td> <%= swimmer.events.count %> </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>

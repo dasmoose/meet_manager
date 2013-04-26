@@ -1,0 +1,25 @@
+<div class="row">
+<table class="large-12">
+  <thead>
+    <tr>
+      <th> Number </th>
+      <th> Gender </th>
+      <th> Age </th>
+      <th> Race Type </th>
+      <th></th>
+    </tr>
+  <thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+    <tr>
+      <td> <%= event.number %> </td>
+      <td> <%= event.gender %> </td>
+      <td> <%= event.age %> </td>
+      <td> <%= event.race_type.display_name %> </td>
+      <td> Info </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>

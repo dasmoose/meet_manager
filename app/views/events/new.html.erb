@@ -1,60 +1,58 @@
 <div class="row">
-  <div class="twelve columns">
-    <div class="row">
-      <div class="nine columns">
-        <h1>Add Events</h1>
-      </div>
-      <div class="three columns">
-        <%= link_to "Add Teams", new_meet_team_path(@meet), :class => "success button" %>
-      </div>
-    </div>
-    <div class="panel"> <div class="row">
-        <%= form_for(@event, :url => meet_events_path(@meet), :remote => true) do |f| %>
-        <div class="two columns">
-          <label>Event #</label>
-          <%= f.text_field :number, :id => "event_number", :value => @current_number %>
-        </div>
-        <div class="three columns">
-          <label>Gender</label>
-          <%= select_tag(:gender, options_for_select(@gender_list)) %>
-        </div>
-        <div class="three columns">
-          <label>Age Group</label>
-          <%= f.text_field :age, :id => "age_group" %> 
-        </div>
-        <div class="two columns">
-          <label>Race Type</label>
-          <%=f.collection_select :race_type, RaceType.all, :id, :display_name %> 
-        </div>
-        <div class="two columns">
-          <br>
-          <%= f.submit "Create Entry", :class => "medium button"%>
-        </div>
-      <% end %>
-      </div>
-    </div>
+  <div class="large-12 columns">
+    <ul class="breadcrumbs">
+      <li> <%= link_to @meet.name, meet_path(@meet) %> </li>
+      <li class="current"><a href="#">Events </li>
+    </ul>
   </div>
 </div>
 
 <div class="row">
-  <div class="twelve columns">
-    <div class="panel">
-      <h3>Current Events</h3>
-      <table class="twelve">
-        <thead>
-          <tr>
-            <th>Event #</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th>Event</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <%= render(@event) %>
-        </tbody>
-      </table>
-    </div>
+  <div class="large-12 columns">
+    <%= form_for(@event, :url => meet_events_path(@meet), :remote => true, :html => { :class => "custom" } ) do |f| %>
+      <fieldset>
+        <legend> Add A New Event </legend>
+        <div class="large-2 columns">
+          <%= f.text_field :number, :id => "event_number", :value => @current_number %>
+        </div>
+        <div class="large-3 columns">
+          <%= select_tag(:gender, options_for_select(@gender_list)) %>
+        </div>
+        <div class="large-3 columns">
+          <%= f.text_field :age, :id => "age_group", :placeholder => "Age" %> 
+        </div>
+        <div class="large-3 columns">
+          <%=f.collection_select :race_type, RaceType.all, :id, :display_name %> 
+        </div>
+        <div class="large-1 columns">
+          <%= image_submit_tag("plus.png") %>
+        </div>
+      </fieldset>
+    <% end %>
   </div>
 </div>
+
+<div class="row">
+  <div class="large-12 columns">
+      <h4>Current Events</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <table>
+      <thead>
+        <tr>
+          <th width="225"> Event #</div>
+          <th width="225">Gender</div>
+          <th width="225">Event</div>
+          <th width="225">Age<div>
+          <th width="50"></div>
+          <th width="50"></div>
+        </tr>
+      </thead>
+      <tbody id="events">
+          <%= render(@event) %>
+      </tbody>
+    </table>
+    </div>
+  </div>

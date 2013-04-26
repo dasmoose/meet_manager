@@ -1,0 +1,21 @@
+  <div class="row">
+    <div class="large-12 columns">
+      <h6> Import Swimmer Data </h6>
+      <h6 class="subheader"> Import swimmers and the events they are signed up for.<br> Click here 
+                             to download a csv template. Be sure entry times are in the format "min:sec.mil".
+      </h6>
+    </div>
+  </div>
+
+  <div class="row">
+    <%= form_for(@team, :url => meet_team_upload_path(@meet, @team) ) do |f| %>
+          <div class="large-3 columns">
+            <%= f.file_field :import_data %>
+          </div>
+          <div class="large-2 columns">
+          <%= f.submit "Import Swimmers", :class => "small button"%>
+          </div>
+          <div class="large-7 columns">
+          </div>
+        <% end %>
+  </div>

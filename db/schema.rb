@@ -25,12 +25,14 @@ ActiveRecord::Schema.define(:version => 20130220075500) do
 
   create_table "heat_entries", :force => true do |t|
     t.integer  "swimmer_id"
+    t.integer  "swimmer_event_time_id"
     t.integer  "heat_id"
-    t.integer  "swim_time_id"
+    t.integer  "swim_time"
     t.boolean  "dq"
     t.integer  "result_time"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.integer  "lane"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "heats", :force => true do |t|
@@ -57,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20130220075500) do
   create_table "swimmer_event_times", :force => true do |t|
     t.integer "swimmer_id"
     t.integer "event_id"
+    t.integer "heat_entry_id"
     t.integer "entry_time"
   end
 

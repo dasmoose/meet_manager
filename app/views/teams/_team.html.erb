@@ -1,20 +1,23 @@
 <% @teams.each do |team| %>
   <tr id="<%= team.id %>">
-    <td> <%= team.name %> </td>
+    <td> <%= link_to team.name, meet_team_swimmers_path(@meet, team) %> </td>
     <td> <%= team.location %> </td>
     <td> <%= team.coach_name %> </td>
-    <td> <%= link_to "Remove", meet_team_path(team.meet_id, team), :method => :delete, :remote => true %> </td>
-    <td> <a onclick="change_to_edit_mode(<%=team.id %>)" href="javascript:void(0);"> Edit </a> </td>
+    <td> <%= link_to image_tag("delete.png"), meet_team_path(team.meet_id, team), :method => :delete, :remote => true %> </td>
+    <td> <a onclick="change_to_edit_mode(<%=team.id %>)" href="javascript:void(0);"> <%= image_tag("edit.png") %> </a> </td>
   </tr>
-
+  <tr></tr>
 <tr id="<%= team.id %>-edit" style="display:none">
-  <%= form_for(team, :url => meet_team_path(team.meet_id, team)) do |f| %>
-    <td><%= f.text_field :name, :id => "name", :value => team.name %></td>
-    <td><%= f.text_field :location, :id => "location", :value => team.location %></td>
-    <td><%= f.text_field :coach_name, :id => "coach_name", :value => team.coach_name %> </td>
-    <td> <%= f.submit "Update", :class => "small button" %> </td>
-    <td> <a onclick="change_to_view_mode(<%=team.id %>)" class="small button" href="javascript:void(0);"> Cancel </a> </td>
-  <% end %>
+  <td colspan="5">
+    <div class="row">
+      <%= form_for(team, :url => meet_team_path(team.meet_id, team), :remote => true) do |f| %>
+      <div class="large-3 columns"> <%= f.text_field :name, :id => "name", :value => team.name %></div>
+      <div class="large-3 columns"> <%= f.text_field :location, :id => "location", :value => team.location %></div>
+      <div class="large-4 columns"> <%= f.text_field :coach_name, :id => "coach_name", :value => team.coach_name %> </div>
+      <div class="large-1 columns"> <%= image_submit_tag("check.png") %> </div>
+      <div class="large-1 columns"> <a onclick="change_to_view_mode(<%=team.id %>)" href="javascript:void(1);"> <%= image_tag("ex.png") %> </a> </div>
+      <% end %>
+    </div>
+  </td>
 </tr>
-
 <% end %>

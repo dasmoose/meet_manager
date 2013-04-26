@@ -1,5 +1,7 @@
 class HeatEntry < ActiveRecord::Base
-  has_one :swimmer
+  belongs_to :swimmer
   belongs_to :heat
-  attr_accessible :swimmer, :heat, :swim_time, :dq, :result_time
+  belongs_to :swimmer_event_time
+  attr_accessible :swimmer, :heat, :swim_time, :dq, :result_time, :lane, :swimmer_event_time
+
 end

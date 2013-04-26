@@ -1,8 +1,34 @@
-<% @events.each do |event| %>
-  <tr> 
-    <td> <%= event.number %> </td>
-    <td> <%= event.gender %>  </td>
-    <td> <%= event.age %> </td>
-    <td> <%= event.race_type.display_name %> </td>
-  </tr>
-<% end %> 
+<div class="row">
+  <div class="twelve columns">
+    <div class="panel">
+        <%= form_for(@swimmer, :url => meet_team_swimmer_add_events_path(params[:meet_id], params[:team_id], @swimmer)) do |f| %> 
+          <h3>Available Events for <%= @swimmer.first_name.capitalize %> <%= @swimmer.last_name.capitalize %> </h3> <%= f.submit "Save Events", :class => "medium button" %>
+      <div class="row">
+        <div class="twelve columns">
+          <div class="two columns">Number</div> 
+          <div class="two columns">Gender</div> 
+          <div class="two columns">Age</div> 
+          <div class="two columns">Race Type</div> 
+          <div class="two columns">Enter?</div> 
+          <div class="two columns">Entry Time</div> 
+        </div>
+      </div>
+      <div class="row">
+        <div class="twelve columns">
+          <%= f.hidden_field :id, :value => @swimmer.id %>
+          <% @events.each do |event| %>
+            <div class="row"><div class="twelve columns">
+            <div class="two columns"> <%= event.number %> </div>
+            <div class="two columns"> <%= event.gender %>  </div>
+            <div class="two columns"> <%= event.age %> </div>
+            <div class="two columns"> <%= event.race_type.display_name %> </div>
+            <div class="two columns"> <%= check_box_tag "event_ids[]", event.id %> </div>
+            <div class="two columns"> <%= text_field_tag "#{event.id}-min" %>:<%= text_field_tag "#{event.id}-sec" %>.<%= text_field_tag "#{event.id}-mil" %> </div>
+        </div></div>
+          <% end %> 
+        <% end %>
+        </div>
+      </div>
+    </div>
+</div>
+</div>

@@ -27,3 +27,15 @@ distances = [25, 50, 100, 200, 500]
     RaceType.create(stroke: stroked, distance: distanced, individual: true)
   end
 end
+
+merp = Meet.create( name: "Summer Swim Fest", location: "Fremont, CA", pool_size: 6)
+race_types = RaceType.all
+genders = [ "Male", "Female"]
+
+Team.create(name: 'Whale Team', short_name: 'whl', location: 'Saratoga, CA', coach_name: 'Mary Coachypants', meet: merp)
+Team.create(name: 'Shark Team', short_name: 'shrk', location: 'Sunnyvale, CA', coach_name: 'Andrew Coachcoach', meet: merp)
+
+for i in 1..21 do 
+  Event.create(number: i, gender: genders.sample , race_type: race_types.sample, meet: merp)
+end
+

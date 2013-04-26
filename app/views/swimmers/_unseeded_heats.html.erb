@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h6> Unseeded Events </h6>
+     <table class="large-12">
+       <thead>
+         <tr>
+           <th>Event # </th>
+           <th>Age</th>
+           <th>Gender</th>
+           <th>Race Type</th>
+           <th>Entry Time</th>
+        </tr>
+       </thead>
+       <tbody>
+         <% @unseeded_events.each do |event| %>
+           <tr>
+             <td><%= event.event.number %></td>
+             <td><%= event.event.age %></td>
+             <td><%= event.event.gender %></td>
+             <td><%= event.event.race_type.display_name %></td>
+             <td><%= event.format_time %></td>
+           </tr>
+         <% end %>
+       </tbody>
+    </table>
+  </div>
+</div>

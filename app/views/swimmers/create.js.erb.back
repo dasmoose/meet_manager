@@ -1,0 +1,7 @@
+var table = document.getElementById("avail_events");
+
+table.innerHTML = "<%= j render("new_events") %>";
+
+var heading = document.getElementById("swimmer_form");
+
+heading.parentNode.removeChild(heading);

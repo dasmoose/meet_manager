@@ -1,25 +1,17 @@
-<!-- Header and Nav -->
-
-  <nav class="top-bar">
-    <ul>
-      <!-- Title Area -->
-      <li class="name">
+<nav class="top-bar">
+    <ul class="title-area">
+       <li class="name">
         <h1>
-          <a href="#">
-           Mr. Meet Manager
-          </a>
+          <%= link_to image_tag("logo.png"), root_path %>
         </h1>
-      </li>
-      <li class="toggle-nav"><a href="#"></a></li>
+       </li>
+     </ul>
+                                                                                 
+  <section class="top-bar-section">
+    <ul class="right">
+       <li class="divider"></li>
+       <li> <%= link_to image_tag("new_meet.png"), new_meet_path %> </li>
+       <li><a href="#"><%= image_tag("list.png") %> </a></li>
     </ul>
-
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li class="divider"></li>
-        <li><%= link_to "New Meet", new_meet_path %></li>
-      </ul>
-    </section>
-  </nav>
-
-
-  <!-- End Header and Nav -->
+  </section>
+</nav>

@@ -1,39 +1,73 @@
 <div class="row">
-<div class="twelve columns">
-  <p>
-  <h4 id="top">
-    <% @alphabet.each_index do |letter| %>
-      <% if @alpha_arr[letter].count != 0 %>
-        <a href="#<%=@alphabet[letter]%>"> <%= @alphabet[letter].upcase %></a>
-    <% else %>
-        <%= @alphabet[letter].upcase %>
-      <% end %>
-      <% if @alphabet[letter] != @alphabet.last %>
-        &brvbar; 
-      <% end %>
-    <% end %>
-  </h4>
-  </p>
-<% @alpha_arr.each_index do |letter| %>
-  <div class="row">
-    <div class="four columns">
-      <p>
-      <% if @alpha_arr[letter].count > 0 %>
-      <a class="button" id="<%=@alphabet[letter]%>" href="#top"><%= @alphabet[letter].upcase %> &uarr;</a>
-    <% end %>
-      </p>
-    </div> <div class="eight columns">
+  <div class="large-12 columns">
+    <ul class="breadcrumbs">
+      <li><%= link_to @meet.name, meet_path(@meet) %></li>
+      <li><%= link_to @team.name, meet_team_swimmers_path(@meet, @team) %> </li>
+      <li class="current"><a href="#"><%= @swimmer.last_name %>, <%= @swimmer.first_name %></a> </li>
+    </ul>
   </div>
 </div>
-<% @alpha_arr[letter].each do |swimmer| %>
-<div class="row"> <div class="twelve columns">
-<div class="panel radius">
-	<h3><%= swimmer.last_name %>, <%= swimmer.first_name %></h3>
-</div>
-</div></div>
-<% end %>
 
-<% end %>
-</div>
+<div class="row">
+  <div class="large-12 columns">
+    <h3> <%= @swimmer.last_name %>, <%= @swimmer.first_name %> <small> Age: <%= @swimmer.age %> # Events: <%= @swimmer.events.count %> </small> </h3>
+  </div>
 </div>
 
+<div class="row">
+  <div class="large-12 columns">
+    <div class="panel">
+      <h6> Add Swimmer to Event </h6>
+      <%= form_for( @swimmer_event_time, :url => meet_team_swimmer_add_event_path(@meet, @team, @swimmer), :remote => true, :html => { :class => "custom" }) do |f| %> 
+        <div class="row">
+          <div class="large-7 columns">
+            <%= select_tag(:event, options_for_select(@all_events)) %>
+          </div>
+          <div class="large-3 columns">
+            <%= text_field_tag(:min, "", :maxlength=>"2" ) %>:<%= text_field_tag(:sec, "", :maxlength => "2" ) %>.<%= text_field_tag(:mil, "", :maxlength => "4" )%>
+          </div>
+          <div class="large-2 columns">
+            <%= f.submit "Add Event", :class => "small button" %> 
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h6> Seeded Events </h6>
+    <table class="large-12">
+      <thead>
+        <tr>
+          <th>Event #</th>
+          <th>Age</th>
+          <th>Gender</th>
+          <th>Race Type </th>
+          <th>Heat #</th>
+          <th>Lane #</th>
+          <th>Entry Time</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @heat_entries.each do |heat| %>
+          <tr>
+            <td> <%= heat.heat.event.number %> </td>
+            <td> <%= heat.heat.event.age %> </td>
+            <td> <%= heat.heat.event.gender %> </td>
+            <td> <%= heat.heat.event.race_type.display_name %> </td>
+            <td> <%= heat.heat.number %> </td>
+            <td> <%= heat.lane %> </td>
+            <td> <%= heat.swimmer_event_time.format_time %> </td>
+            <td> Delete </td>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="unseeded">
+  <%= render("unseeded_heats") %>
+</div>

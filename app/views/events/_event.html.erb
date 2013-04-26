@@ -1,21 +1,25 @@
 <% @events.each do |event| %>
   <tr id="<%= event.id %>">
-  <td> <%= event.number %> </td>
-  <td> <%= event.gender %> </td>
-  <td> <%= event.age %> </td>
-  <td> <%= event.race_type.display_name %> </td>
-  <td> <%= link_to "Remove", meet_event_path(event.meet_id, event), :method => :delete, :remote => true %> </td>
-  <td> <a onclick="change_to_edit_mode(<%=event.id%>)" href="javascript:void(0);"> Edit </a> </td>
-</tr>
-
+    <td> <%= event.number %> </td>
+    <td> <%= event.gender %> </td>
+    <td> <%= event.race_type.display_name %> </td>
+    <td> <%= event.age %> </td>
+    <td> <%= link_to image_tag("delete.png"), meet_event_path(event.meet_id, event), :method => :delete, :remote => true %> </td>
+    <td> <a onclick="change_to_edit_mode(<%=event.id %>)" href="javascript:void(0);"> <%= image_tag("edit.png") %> </a> </td>
+  </tr>
+  <tr></tr>
 <tr id="<%= event.id %>-edit" style="display:none">
-  <%=form_for(event, :url => meet_event_path(event.meet_id, event)) do |f| %>
-  <td><%=f.text_field :number, :id=>"event_number", :value => event.number %> </td>
-  <td><%=select_tag(:gender, options_for_select(@gender_list), :selected => event.gender)%> </td>
-  <td><%=f.text_field :age, :id=>"age_group", :value => event.age %></td>
-  <td><%=f.collection_select :race_type, RaceType.all, :id, :display_name, :selected => event.race_type.id %></td>
-  <td><%=f.submit "Update", :class=>"small button"%></td>
-  <td><a onclick="change_to_view_mode(<%=event.id%>)" class="small button" href="javascript:void(0);"> Cancel </a> </td>
-<% end %>
+  <td colspan="6">
+    <div class="row">
+      <%= form_for(event, :url => meet_event_path(event.meet_id, event), :remote => true) do |f| %>
+      <div class="large-2 columns"> <%= f.text_field :number, :id => "event_number", :value => event.number %></div>
+      <div class="large-3 columns"> <%= select_tag(:gender, options_for_select(@gender_list), :selected => event.gender) %></div>
+      <div class="large-2 columns"> <%= f.text_field :age, :id => "age_group", :value => event.age %> </div>
+      <div class="large-3 columns"> <%= f.collection_select :race_type, RaceType.all, :id, :display_name, :selected => event.race_type.id %> </div>
+      <div class="large-1 columns"> <%= image_submit_tag("check.png") %> </div>
+      <div class="large-1 columns"> <a onclick="change_to_view_mode(<%=event.id %>)" href="javascript:void(1);"> <%= image_tag("ex.png") %> </a> </div>
+      <% end %>
+    </div>
+  </td>
 </tr>
 <% end %>

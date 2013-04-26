@@ -1,4 +1,3 @@
-
 function change_to_edit_mode(id){
   var event_cell = document.getElementById(id);
   var edit_id = id + "-edit";

@@ -41,21 +41,25 @@ class EventsController < ApplicationController
     @gender_list = ["Male", "Female"]
     @meet = Meet.find_by_id(params[:meet_id])
     @event = Event.find_by_id(params[:id])
-    @race_type = RaceType.find_by_id(params[:event][:race_type])
 
+    @race_type = RaceType.find_by_id(params[:event][:race_type])
     @event.update_attributes(number: params[:event][:number],
                              gender: @gender_list[params[:gender].to_i],
                              age: params[:event][:age],
                              race_type: @race_type)
     @events = Event.find_all_by_meet_id(params[:meet_id], :order => "number DESC") 
-  redirect_to new_meet_event_path(@meet)
+  respond_to do |format|
+    format.html { redirect_to new_meet_event_path(@meet) }
+    format.js
+  end
   end
 
   def destroy
+    @gender_list = ["Male", "Female"] 
     @event = Event.find_by_id(params[:id])
     @event.destroy
-    @events = Event.find_all_by_meet_id(params[:meet_id], :order => "number ASC")
-
+    @events = Event.find_all_by_meet_id(params[:meet_id], :order => "number DESC")
+    
     respond_to do |format|
       format.html { redirect_to new_meet_event_path(params[:meet_id]) }
       format.js

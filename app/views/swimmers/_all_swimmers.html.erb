@@ -1,0 +1,43 @@
+<div id="all_swimmers">
+  <div class="row">
+    <div class="large-12 large-centered columns">
+      <center>
+    <h4 id="top">
+    <% @alphabet.each_index do |letter| %>
+      <% if @alpha_arr[letter].count != 0 %>
+        <a href="#<%=@alphabet[letter]%>"> <%= @alphabet[letter].upcase %></a>
+      <% else %>
+        <%= @alphabet[letter].upcase %>
+      <% end %>
+      <% if @alphabet[letter] != @alphabet.last %>
+        &brvbar; 
+      <% end %>
+    <% end %>
+    </h4>
+  </center>
+    </div>
+  </div>
+
+<% @alpha_arr.each_index do |letter| %>
+  <div class="row">
+    <div class="four columns">
+      <% if @alpha_arr[letter].count > 0 %>
+      <a class="small button" id="<%=@alphabet[letter]%>" href="#top"><%= @alphabet[letter].upcase %> &uarr;</a>
+      <% end %>
+    </div> 
+    <div class="eight columns">
+    </div>
+  </div>
+
+  <% @alpha_arr[letter].each do |swimmer| %>
+   <div class="row"> 
+     <div class="large-12 columns">
+       <div class="panel radius">
+         <h5><%= swimmer.last_name %>, <%= swimmer.first_name %> <small> Age: <%= swimmer.age %> </small> <span> <%= link_to "Info", meet_team_swimmer_path(@meet, swimmer.team.id, swimmer.id) %> </span> </h5>
+       </div>
+     </div>
+   </div>
+  <% end %>
+
+<% end %>
+</div>

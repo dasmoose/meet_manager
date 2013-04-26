@@ -1,4 +1,4 @@
-var table = document.getElementsByTagName("tbody")[0];
+var table = document.getElementById("events");
 if (<%= @event.errors.any? %>) 
 {
   document.getElementById('event_number').setAttribute("class", "error");
