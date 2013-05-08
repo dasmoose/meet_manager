@@ -1,7 +1,8 @@
   <div class="row">
     <div class="large-12 columns">
       <h6> Import Swimmer Data </h6>
-      <h6 class="subheader"> Import swimmers and the events they are signed up for.<br> Click here 
+      <h6 class="subheader"> Import swimmers and the events they are signed up for.<br> 
+        <%= link_to "Click here", meet_download_csv_path(@meet) %> 
                              to download a csv template. Be sure entry times are in the format "min:sec.mil".
       </h6>
     </div>

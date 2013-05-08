@@ -18,6 +18,16 @@ class Event < ActiveRecord::Base
     entries.flatten!
   end
 
+  def non_seeded
+    entries = []
+    self.swimmer_event_times.each do |event|
+      if event.heat_entry.nil?
+        entries << event
+      end
+    end
+    entries
+  end
+
   def display_text
     "# #{self.number} - #{self.age} #{self.gender} #{self.race_type.display_name}"
   end

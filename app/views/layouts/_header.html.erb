@@ -10,8 +10,9 @@
   <section class="top-bar-section">
     <ul class="right">
        <li class="divider"></li>
-       <li> <%= link_to image_tag("new_meet.png"), new_meet_path %> </li>
-       <li><a href="#"><%= image_tag("list.png") %> </a></li>
+       <li> <%= link_to "New Meet", new_meet_path%> </li>
+       <li> <%= link_to "All Meets", meets_path %> </li>
+       <li> <%= link_to "Log out", logout_path, :method => "delete" %> </li>
     </ul>
   </section>
 </nav>

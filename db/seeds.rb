@@ -39,3 +39,4 @@ for i in 1..21 do
   Event.create(number: i, gender: genders.sample , race_type: race_types.sample, meet: merp)
 end
 
+User.create(user_name: "admin", password: "admin123", password_confirmation: "admin123")

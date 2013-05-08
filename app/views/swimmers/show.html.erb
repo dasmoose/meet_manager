@@ -10,9 +10,14 @@
 
 <div class="row">
   <div class="large-12 columns">
-    <h3> <%= @swimmer.last_name %>, <%= @swimmer.first_name %> <small> Age: <%= @swimmer.age %> # Events: <%= @swimmer.events.count %> </small> </h3>
+    <h3> <%= @swimmer.last_name %>, <%= @swimmer.first_name %> <small> <span class="icons rank"></span> <%= @swimmer.age %> # <%= @swimmer.events.count %> </small> </h3>
+    <div id="bar">
+      <%= link_to "Delete", meet_team_swimmer_path(@meet, @team, @swimmer), :method => "delete" , :class => "small alert button"%>
+      <%= link_to "Edit", edit_meet_team_swimmer_path(@meet, @team, @swimmer), :class => "small success button" %>
+    </div>
   </div>
 </div>
+
 
 <div class="row">
   <div class="large-12 columns">
@@ -35,9 +40,16 @@
   </div>
 </div>
 
+
+
 <div class="row">
   <div class="large-12 columns">
-    <h6> Seeded Events </h6>
+<div class="section-container auto" data-section>
+  <section>
+    <p class="title" data-section-title><a href="#panel1"> Seeded Events </a></p>
+    <div class="content" data-section-content>
+<div class="row">
+  <div class="large-12 columns">
     <table class="large-12">
       <thead>
         <tr>
@@ -54,20 +66,28 @@
       <tbody>
         <% @heat_entries.each do |heat| %>
           <tr>
-            <td> <%= heat.heat.event.number %> </td>
+            <td> <%= link_to heat.heat.event.number, meet_event_path(@meet, heat.heat.event) %> </td>
             <td> <%= heat.heat.event.age %> </td>
             <td> <%= heat.heat.event.gender %> </td>
             <td> <%= heat.heat.event.race_type.display_name %> </td>
             <td> <%= heat.heat.number %> </td>
             <td> <%= heat.lane %> </td>
             <td> <%= heat.swimmer_event_time.format_time %> </td>
-            <td> Delete </td>
+            <td> <%= link_to "Delete", meet_team_swimmer_swimmer_event_time_path(@meet, @team, @swimmer, heat.swimmer_event_time.id), :method => "delete" %> </td>
         <% end %>
       </tbody>
     </table>
   </div>
 </div>
-
-<div id="unseeded">
-  <%= render("unseeded_heats") %>
 </div>
+  </section>
+  <section>
+  <p class="title" data-section-title><a href="#panel2"> Unseeded Events </a></p>
+  <div class="content" data-section-content>
+    <div id="unseeded">
+    <%= render("unseeded_heats") %>
+    </div>
+  </div>
+  </section>
+</div>
+</div></div>

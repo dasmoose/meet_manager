@@ -1,8 +1,25 @@
 class TeamsController < ApplicationController
+
+  before_filter :check_if_logged_in
+
   def show
   end
 
   def edit
+  end
+
+  def download_csv
+    file = Tempfile.new('foo')
+    meet = Meet.find_by_id(params[:meet_id]) 
+    
+    file.print "last_name, first_name, gender, age"
+    meet.events.count.times do |event|
+      file.print ", #{event + 1}"
+    end
+    file.puts
+
+    file.close
+    send_file file.path, :filename => "import.csv" 
   end
 
   def update
@@ -42,6 +59,7 @@ class TeamsController < ApplicationController
   end
 
   def destroy
+    @meet = Meet.find_by_id(params[:meet_id])
     @team = Team.find_by_id(params[:id])
     @team.destroy
     @teams = Team.find_all_by_meet_id(params[:meet_id], :order => "name ASC")
@@ -63,9 +81,19 @@ class TeamsController < ApplicationController
 
     swimmer_lines.each do |line|
       @events = line.split(", ")
-      @swimmer = Swimmer.new
-      @swimmer.last_name = @events.shift
-      @swimmer.first_name = @events.shift
+      last_name = @events.shift
+      first_name = @events.shift
+      
+      search = Swimmer.where("last_name = ? AND first_name = ? AND team_id = ?", last_name, first_name, @team.id)
+
+      if !search.first.nil?
+        @swimmer = search.first
+      else
+        @swimmer = Swimmer.new
+      end
+
+      @swimmer.last_name = last_name
+      @swimmer.first_name = first_name
       @events.shift # age
       @swimmer.age = @events.shift
       @swimmer.team = @team
@@ -92,6 +120,13 @@ class TeamsController < ApplicationController
     end
     redirect_to meet_team_swimmers_path(@meet, @team)
   end
+  
+  def check_if_logged_in
+    if !signed_in?
+      redirect_to root_path
+    end
+  end
+
 end
 
   

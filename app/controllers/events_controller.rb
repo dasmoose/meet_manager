@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   
+  before_filter :check_if_logged_in
+
   def new
     @event = Event.new
     @meet = Meet.find_by_id(params[:meet_id])
@@ -14,6 +16,10 @@ class EventsController < ApplicationController
   end
 
   def show 
+    @meet = Meet.find_by_id(params[:meet_id])
+    @event = Event.find_by_id(params[:id])
+    @heats = @event.heats
+    @non_seeded = @event.non_seeded
   end
 
   def create
@@ -63,6 +69,12 @@ class EventsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to new_meet_event_path(params[:meet_id]) }
       format.js
+    end
+  end
+  
+  def check_if_logged_in
+    if !signed_in?
+      redirect_to root_path
     end
   end
 

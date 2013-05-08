@@ -1,5 +1,5 @@
 var table = document.getElementById("teams");
-
+var flash = document.getElementById("flash");
 if (<%= @team.errors.any? %>)
 {
 
@@ -7,4 +7,6 @@ if (<%= @team.errors.any? %>)
 else
 {
   table.innerHTML = "<%= j render(@team) %>";
+  flash.innerHTML = "<%= j render("sucess_add") %>"
+  ('input[type="text"]').val('');
 }

@@ -1,0 +1,7 @@
+var button = $( "#activate_button");
+if (<%= @activate %>){
+ button.removeClass( 'small button').addClass( 'small success button' ); 
+}
+else {
+  button.removeClass( 'small success button' ).addClass( 'small button' );
+}

@@ -1,4 +1,7 @@
 class SwimmersController < ApplicationController
+
+  before_filter :check_if_logged_in
+
   def index
     @swimmer = Swimmer.new
     @team = Team.find_by_id(params[:team_id])
@@ -66,7 +69,13 @@ class SwimmersController < ApplicationController
     @heat_entries = @swimmer.heat_entries
     @unseeded_events = @swimmer.unseeded_entries
   end
-  
+
+  def destroy 
+    Swimmer.find_by_id(params[:id]).destroy
+    meet = Meet.find_by_id(params[:meet_id])
+    team = Team.find_by_id(params[:team_id])
+    redirect_to meet_team_swimmers_path(meet, team)
+  end
 
   def add_event
     @event_time = SwimmerEventTime.new
@@ -86,4 +95,30 @@ class SwimmersController < ApplicationController
       format.js
     end
   end
+
+  def edit
+    @meet = Meet.find_by_id(params[:meet_id])
+    @team = Team.find_by_id(params[:team_id])
+    @swimmer = Swimmer.find_by_id(params[:id])
+    @gender_list = ["Male", "Female"]
+  end
+
+  def update
+    @meet = Meet.find_by_id(params[:meet_id])
+    @team = Team.find_by_id(params[:team_id])
+    @swimmer = Swimmer.find_by_id(params[:id])
+    
+    @swimmer.update_attributes(first_name: params[:swimmer][:first_name] ,
+                               last_name: params[:swimmer][:last_name],
+                               age: params[:swimmer][:age])
+
+   redirect_to meet_team_swimmer_path(@meet, @team, @swimmer)
+  end
+
+  def check_if_logged_in
+    if !signed_in?
+      redirect_to root_path
+    end
+  end
+
 end

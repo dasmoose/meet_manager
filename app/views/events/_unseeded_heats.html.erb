@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h6> These event entries have not been seeded into a heat. </h6>
+     <table class="large-12">
+       <thead>
+         <tr>
+           <th>Swimmer Name</th>
+           <th>Age</th>
+           <th>Team </th>
+           <th>Entry Time</th>
+        </tr>
+       </thead>
+       <tbody>
+         <% @non_seeded.each do |event| %>
+           <tr>
+             <td><%= link_to event.swimmer.display_name, meet_team_swimmer_path(@meet, event.swimmer.team, event.swimmer) %></td>
+             <td><%= event.swimmer.age %></td>
+             <td><%= link_to event.swimmer.team.name, meet_team_swimmers_path(@meet, event.swimmer.team) %></td>
+             <td><%= event.format_time %></td>
+           </tr>
+         <% end %>
+       </tbody>
+    </table>
+  </div>
+</div>

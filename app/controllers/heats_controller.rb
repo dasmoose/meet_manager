@@ -1,4 +1,7 @@
 class HeatsController < ApplicationController
+
+  before_filter :check_if_logged_in
+
   def seed
     Heat.destroy_all
 
@@ -9,7 +12,7 @@ class HeatsController < ApplicationController
     
   # Loop through all the events
     @events.each do |event|
-      @swimmers = SwimmerEventTime.find_all_by_event_id(event.id, :order => "entry_time DESC")
+      @swimmers = SwimmerEventTime.find_all_by_event_id(event.id, :order => "entry_time ASC")
       swimmer_count = @swimmers.count
       heat_count = ( @swimmers.count.to_f / lane_nums.to_f ).ceil
       swimmer_split = swimmer_count / heat_count if heat_count != 0
@@ -58,4 +61,11 @@ class HeatsController < ApplicationController
     end
     redirect_to meet_all_heats_path(params[:meet_id])
   end
+
+  def check_if_logged_in
+    if !signed_in?
+      redirect_to root_path
+    end
+  end
+
 end

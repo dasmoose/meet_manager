@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h3>All Meets</h3>
+    <table class="large-12">
+      <thead>
+        <tr>
+          <th>Meet Name</th>
+          <th>Location</th>
+          <th># Teams</th>
+          <th># Events</th>
+          <th># Swimmers</th>
+          <th>Active</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @meets.each do |meet| %>
+          <tr>
+            <td> <%= link_to meet.name, meet_path(meet) %> </td>
+            <td> <%= meet.location %> </td>
+            <td> <%= meet.teams.count %> </td>
+            <td> <%= meet.events.count %> </td>
+            <td> <%= meet.swimmers.count %> </td>
+            <td> <% if meet.current_meet %> 
+                    X 
+                <% end %>
+            </td>
+            <td> <%= link_to "Delete", meet_path(meet), :method => "delete" %> </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

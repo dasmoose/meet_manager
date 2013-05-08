@@ -1,15 +1,19 @@
 <div class="row">
   <div class="large-12 columns">
-    <h3><%= @meet.name %> <small> Location: <%= @meet.location %> # Teams: <%= @meet.teams.count %> # Swimmers: <%= @meet.swimmers.count %> # Events: <%= @meet.events.count %> </small> </h3>
+    <h3><%= @meet.name %> <span id="info"> <span class="icons location"></span> <%= @meet.location %> <span class="icons teams"></span> <%= @meet.teams.count %> <span class="icons swimmer"></span><%= @meet.swimmers.count %> <span class="icons events"></span><%= @meet.events.count %> </span> </h3>
   </div>
 </div>
 
 <div class="row">
   <div class="large-12 columns">
-    <ul class="button-group">
-      <li><a href="#" class="small button">Edit Meet</a></li>
+    <ul class="button-group" id="options">
+      <li><%= link_to "Edit Meet", edit_meet_path(@meet), :class => "small button" %></li>
       <li><%= link_to "Heats", meet_all_heats_path(@meet), :class => "small button" %></li>
-      <li><a href="#" class="small button">Check-In Swimmers</a></li>
+      <% if !@meet.current_meet %>
+        <li><%= link_to "Set Current Meet", meet_activate_path(@meet), :id => "activate_button", :class => "small button" %></li>
+      <% else %>
+        <li><%= link_to "Current Meet", meet_activate_path(@meet), :id => "activate_button", :class => "small success button" %></li>
+      <% end %>
     </ul>
   </div>
 </div>

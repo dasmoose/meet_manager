@@ -35,14 +35,14 @@ class SwimmerEventTimesController < ApplicationController
   end
 
   def destroy
-    @team = Team.find_by_id(params[:id])
-    @team.destroy
-    @teams = Team.find_all_by_meet_id(params[:meet_id], :order => "name ASC")
+    @event_time = SwimmerEventTime.find_by_id(params[:id])
+    @meet = Meet.find_by_id(params[:meet_id])
+    @team = Team.find_by_id(params[:team_id])
 
-    respond_to do |format|
-      format.html { redirect_to new_meet_team_path(params[:meet_id]) }
-      format.js
-    end
+    swimmer = Swimmer.find_by_id(@event_time.swimmer)
+    @event_time.heat_entry.destroy
+    @event_time.destroy
+    redirect_to meet_team_swimmer_path(@meet, @team, swimmer)
   end
 end
 

@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="large-12 columns">
+    <ul class="breadcrumbs">
+      <li><%= link_to @meet.name, meet_path(@meet) %></li>
+      <li><%= link_to @team.name, meet_team_swimmers_path(@meet, @team) %> </li>
+      <li class="current"><a href="#"><%= @swimmer.last_name %>, <%= @swimmer.first_name %></a> </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <h3> <%= @swimmer.last_name %>, <%= @swimmer.first_name %> <small> Age: <%= @swimmer.age %> # Events: <%= @swimmer.events.count %> </small> </h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div class="panel">
+      <%= render( "edit_swimmer_form" ) %>
+    </div>
+  </div>
+</div>
+
+

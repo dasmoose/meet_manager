@@ -1,3 +1,6 @@
 var table = document.getElementById("all_swimmers");
+var flash = document.getElementById("flash");
 
+flash.innerHTML = "<%= j render("sucess_add") %>"
 table.innerHTML = "<%= j render("all_swimmers") %>";
+$('input[type="text"]').val('');

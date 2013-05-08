@@ -47,6 +47,7 @@ module Mrmeetmanager
     # like if you have constraints or database-specific column types
     # config.active_record.schema_format = :sql
 
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
     # Enforce whitelist mode for mass assignment.
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
@@ -55,6 +56,7 @@ module Mrmeetmanager
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.precompile += %w( .svg .eot .woff .ttf )
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="large-12 columns">
+    <h1> <%= @meet.name %> </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <div class="panel">
+      <h3> Current Event </h3>
+      <% if @meet.event.nil? %>
+        No Events have been create for this meet.
+      <% else %>
+        Event #<%= @meet.current_event.number %>
+        
+      <% end %>
+    <h5> </h5>
+    </div>
+  </div>
+</div>

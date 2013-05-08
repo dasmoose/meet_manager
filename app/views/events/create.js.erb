@@ -5,6 +5,8 @@ if (<%= @event.errors.any? %>)
 }
 else 
 {
+  var flash = document.getElementById("flash");
+  flash.innerHTML = "<%= j render("sucess_add") %>"
   table.innerHTML = "<%= j render(@event) %>";
   var number = document.getElementById('event_number');
   number.value = parseInt(number.value) + 1;

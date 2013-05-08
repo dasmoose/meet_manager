@@ -1,6 +1,6 @@
 <% @events.each do |event| %>
   <tr id="<%= event.id %>">
-    <td> <%= event.number %> </td>
+    <td> <%= link_to event.number, meet_event_path(@meet, event) %> </td>
     <td> <%= event.gender %> </td>
     <td> <%= event.race_type.display_name %> </td>
     <td> <%= event.age %> </td>

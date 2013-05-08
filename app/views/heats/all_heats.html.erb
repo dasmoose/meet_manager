@@ -8,9 +8,11 @@
 </div>
 
 <div class="row">
-  <div class="large-12 columns">
+  <div class="large-12 columns" id="bar-non">
+    <div id="bar-non">
     <%= link_to "Seed Heats", meet_seed_heats_path(@meet), :class => "small button" %>
     <%= link_to "Clear Heats", meet_delete_heats_path(@meet), :class => "small alert button" %>
+  </div>
   </div>
 </div>
 
@@ -18,7 +20,7 @@
   <div class="large-12 columns">
     <% @events.each do |event| %>
       <div class="panel">
-            <h3> Event #<%= event.number %>
+        <h3> <%= link_to "Event ##{event.number}", meet_event_path(@meet, event) %>
             <small> Age: <%= event.age %> Gender: <%= event.gender %> Race Type: <%= event.race_type.display_name %> </small> </h3>
 
       <% if event.heats.count == 0 %>
@@ -46,7 +48,7 @@
                   <td> <%= the_heat.lane %> </td>
                   <td> <%= link_to the_heat.swimmer.display_name, meet_team_swimmer_path(@meet, the_heat.swimmer.team, the_heat.swimmer) %> </td>
                   <td> <%= link_to the_heat.swimmer.team.name, meet_team_swimmers_path(@meet, the_heat.swimmer.team) %> </td>
-                  <td> </td>
+                  <td> <%= the_heat.swimmer_event_time.format_time %></td>
                 <% end %>
               </tr>
         <% end %>

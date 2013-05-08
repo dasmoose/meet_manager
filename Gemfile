@@ -6,7 +6,7 @@ gem 'rails', '3.2.9'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
-
+gem 'rails-erd'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,7 +27,7 @@ group :development do
     gem "better_errors"
 end
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

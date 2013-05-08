@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220075500) do
+ActiveRecord::Schema.define(:version => 20130509020341) do
 
   create_table "events", :force => true do |t|
     t.integer  "race_type_id"
@@ -42,11 +42,8 @@ ActiveRecord::Schema.define(:version => 20130220075500) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "meets", :force => true do |t|
-    t.string  "name"
-    t.string  "location"
-    t.integer "pool_size"
-  end
+# Could not dump table "meets" because of following StandardError
+#   Unknown type 'refernce' for column 'event'
 
   create_table "race_types", :force => true do |t|
     t.string   "stroke"
@@ -84,12 +81,9 @@ ActiveRecord::Schema.define(:version => 20130220075500) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "user_name"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "permissions"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.string "user_name"
+    t.string "password_digest"
+    t.string "remember_token"
   end
 
 end

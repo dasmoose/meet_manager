@@ -4,6 +4,7 @@ class Swimmer < ActiveRecord::Base
   has_many :heat_entries, :dependent => :destroy
   has_many :heats, :through => :heat_entries
   belongs_to :team
+  has_one :meet, :through => :team
   attr_accessible :first_name, :last_name, :age, :team, :checked_in
   validates :first_name, presence: true
   validates :last_name, presence: true

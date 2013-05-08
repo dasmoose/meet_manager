@@ -7,8 +7,99 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
- *
- *= require_self
+ *= require font-sheet
  *= require foundation_and_overrides
+ *= require_self
  *= require_tree .
  */
+
+div#bar, a#event_edit {
+  float: right;
+  margin-top: -45px;
+}
+
+input#sec, input#min, input#mil {
+  width: 50px;
+  display: inline;
+}
+
+div.custom.dropdown {
+  z-index: 1000;
+}
+
+.top-bar-section li a:not(.button):hover {
+  background: #188976;
+}
+
+a#swimmer_info {
+  float: right;
+}
+
+ul#options.button-group, div#bar-non {
+  float: right;
+}
+
+span#info {
+  float: right;
+}
+
+.icons {
+  font-family: 'meeticonsregular';
+  font-weight: normal;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+}
+
+.location:before {
+  content: "\f004";
+}
+
+.add_meet:before {
+  content: "\f000";
+}
+
+.show_meet:before {
+  content: "\f001";
+}
+
+.teams:before {
+  content: "\f002";
+}
+
+.swimmer:before {
+  content: "\f003";
+}
+
+.rank:before {
+  content: "\f005";
+}
+
+.login:before {
+  content: "\f007";
+}
+
+.logout:before {
+  content: "\f006"; 
+}
+
+.coach:before {
+  content: "\f009";
+}
+
+.events:before {
+  content: "\f00A";
+}
+
+.race_type:before {
+  content: "\f00B";
+}
+
+.edit:before {
+  content: "\f00C";
+}
+
+.info:before {
+  content: "\f00D";
+}
+

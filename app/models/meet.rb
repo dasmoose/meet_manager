@@ -1,17 +1,33 @@
 class Meet < ActiveRecord::Base
+
   has_many :events, :dependent => :destroy
   has_many :teams, :dependent => :destroy
-  attr_accessible :name, :location, :pool_size
+  has_many :swimmers, :through => :teams
+
+  attr_accessible :name, :location, :pool_size, :current_meet, :event
 
   validates :name, :location, :pool_size, :presence => true
   validates :pool_size, :numericality => { :only_integer => true }
 
-  def swimmers 
-    swimmer = []
-    self.teams.each do |team|
-      swimmer << team.swimmers
+
+  def self.get_active_meet 
+    Meet.where("current_meet = ?", true).first
+  end
+
+  def self.set_active_meet(meet)
+    Meet.all.each do |m|
+     m.update_attribute( :current_meet, false )   
     end
-    swimmer.flatten!
+    meet.update_attribute( :current_meet, true )
+  end
+
+  def current_event
+    if self.event.nil? && self.events.count != 0  
+      event = self.event.events.order("number ASC").first
+      self.set_attributte( :event, event ) 
+    else
+      Event.find_by_id(self.event)
+    end
   end
 
   def swimmer_event_times
